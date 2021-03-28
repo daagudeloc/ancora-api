@@ -1,0 +1,11 @@
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\repository\ProductRepository.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\domain\Product.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\utils\Utils.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\assembler\exception\advice\BaseExceptionAdvice.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\assembler\exception\ProductNotFoundException.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\config\MongoConfig.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\service\ProductService.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\assembler\exception\advice\ProductNotFoundAdvice.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\assembler\ProductModelAssembler.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\controller\ProductController.java
+D:\Ancora\Repos\products\src\main\java\com\ancora\services\products\ProductsApplication.java

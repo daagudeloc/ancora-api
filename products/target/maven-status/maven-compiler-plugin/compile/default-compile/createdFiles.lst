@@ -1,0 +1,11 @@
+com\ancora\services\products\assembler\ProductModelAssembler.class
+com\ancora\services\products\utils\Utils.class
+com\ancora\services\products\controller\ProductController.class
+com\ancora\services\products\assembler\exception\advice\BaseExceptionAdvice.class
+com\ancora\services\products\domain\Product.class
+com\ancora\services\products\repository\ProductRepository.class
+com\ancora\services\products\assembler\exception\advice\ProductNotFoundAdvice.class
+com\ancora\services\products\config\MongoConfig.class
+com\ancora\services\products\service\ProductService.class
+com\ancora\services\products\ProductsApplication.class
+com\ancora\services\products\assembler\exception\ProductNotFoundException.class

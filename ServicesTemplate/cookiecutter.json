@@ -1,0 +1,6 @@
+{
+	"service_name": "products",
+	"service_class_name": "Product",
+	"service_instance_name": "product",
+	"service_app_name": "Products"
+}

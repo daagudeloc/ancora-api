@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ancora.services.accounts.assembler.AccountModelAssembler;
@@ -52,20 +51,20 @@ public class AccountController {
 				linkTo(methodOn(AccountController.class).findAllAccounts()).withSelfRel());
 	}
 
-	@GetMapping("/{accountNumber}")
+	@GetMapping("/cell/{cellNumber}")
 	@CrossOrigin(origins = "http://localhost:5000")
-	public EntityModel<Account> findAccountByNumber(@PathVariable final String accountNumber) {
-		final Account account = accountService.findAccountByNumber(accountNumber)
-				.orElseThrow(() -> new AccountNotFoundException(accountNumber));
+	public EntityModel<Account> findAccountByCellNumber(@PathVariable final String cellNumber) {
+		final Account account = accountService.findAccountByCellNumber(cellNumber)
+				.orElseThrow(() -> new AccountNotFoundException(cellNumber));
 		
 		return modelAssembler.toModel(account);
 	}
 
-	@GetMapping()
+	@GetMapping("/id/{idNumber}")
 	@CrossOrigin(origins = "http://localhost:5000")
-	public EntityModel<Account> findAccountByIdNumber(@RequestParam final String id) {
-		final Account account = accountService.findAccountByIdNumber(id)
-				.orElseThrow(() -> new AccountNotFoundException(id));
+	public EntityModel<Account> findAccountByIdNumber(@PathVariable final String idNumber) {
+		final Account account = accountService.findAccountByIdNumber(idNumber)
+				.orElseThrow(() -> new AccountNotFoundException(idNumber));
 		
 		return modelAssembler.toModel(account);
 	}
@@ -80,11 +79,24 @@ public class AccountController {
 				.body(model);
 	}
 
-	@PutMapping("/update/{accountNumber}")
-	public ResponseEntity<?> updateAccount(@RequestBody final Account newAccount, @PathVariable final String accountNumber) {
-		final Account updatedAccount = accountService.findAccountByNumber(accountNumber)
+	@PutMapping("/cell/{cellNumber}")
+	public ResponseEntity<?> updateAccountWithCellNumber(@RequestBody final Account newAccount, @PathVariable final String cellNumber) {
+		final Account updatedAccount = accountService.findAccountByCellNumber(cellNumber)
 				.map(account -> Utils.mapToNewAccount(account, newAccount))
-				.orElseThrow(() -> new AccountNotFoundException(accountNumber));
+				.orElseThrow(() -> new AccountNotFoundException(cellNumber));
+		
+		final EntityModel<Account> model = modelAssembler.toModel( accountService.saveAccountData( updatedAccount ));
+		
+		return ResponseEntity
+				.created(model.getRequiredLink(SELF).toUri())
+				.body(model);
+	}
+
+	@PutMapping("/id/{idNumber}")
+	public ResponseEntity<?> updateAccountWithIdNumber(@RequestBody final Account newAccount, @PathVariable final String idNumber) {
+		final Account updatedAccount = accountService.findAccountByIdNumber(idNumber)
+				.map(account -> Utils.mapToNewAccount(account, newAccount))
+				.orElseThrow(() -> new AccountNotFoundException(idNumber));
 		
 		final EntityModel<Account> model = modelAssembler.toModel( accountService.saveAccountData( updatedAccount ));
 		
@@ -93,10 +105,20 @@ public class AccountController {
 				.body(model);
 	}
 	
-	@DeleteMapping("/{accountNumber}")
-	public ResponseEntity<?> deleteAccount(@PathVariable final String accountNumber) {
-		final Account account = accountService.findAccountByNumber(accountNumber)
-				.orElseThrow(() -> new AccountNotFoundException(accountNumber));
+	@DeleteMapping("/cell/{cellNumber}")
+	public ResponseEntity<?> deleteAccountWithCellNumber(@PathVariable final String cellNumber) {
+		final Account account = accountService.findAccountByCellNumber(cellNumber)
+				.orElseThrow(() -> new AccountNotFoundException(cellNumber));
+		
+		accountService.deleteAccount(account);
+		
+		return ResponseEntity.noContent().build();
+	}
+	
+	@DeleteMapping("/id/{idNumber}")
+	public ResponseEntity<?> deleteAccountWithIdNumber(@PathVariable final String idNumber) {
+		final Account account = accountService.findAccountByIdNumber(idNumber)
+				.orElseThrow(() -> new AccountNotFoundException(idNumber));
 		
 		accountService.deleteAccount(account);
 		

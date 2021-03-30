@@ -9,9 +9,9 @@ public class Utils {
 		account.setFirstName(newAccount.getFirstName());
 		account.setLastName(newAccount.getLastName());
 		account.setBirthDate(newAccount.getBirthDate());
-		account.setBalance(newAccount.getBalance());
+		account.setTimeBalance(newAccount.getTimeBalance());
 		account.setIdNumber(newAccount.getIdNumber());
-		account.setNumber(newAccount.getNumber());
+		account.setCellNumber(newAccount.getCellNumber());
 		
 		return account;
 	}

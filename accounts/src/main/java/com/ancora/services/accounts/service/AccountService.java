@@ -22,8 +22,8 @@ public class AccountService {
 		return repository.findAll();
 	}
 	
-	public Optional<Account> findAccountByNumber(final String number) {
-		return repository.findByNumber(number);
+	public Optional<Account> findAccountByCellNumber(final String cellNumber) {
+		return repository.findByCellNumber(cellNumber);
 	}
 
 	public Optional<Account> findAccountByIdNumber(final String idNumber) {
